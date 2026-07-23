@@ -1,0 +1,9 @@
+bunnylog-frontend/node_modules/
+bunnylog-frontend/dist/
+
+.env
+
+.vscode/
+.idea/
+
+.DS_Store
