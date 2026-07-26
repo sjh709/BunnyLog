@@ -1,8 +1,11 @@
 import './Welcome.css';
 import { Leaf, BookOpen, Rabbit } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 
 function Welcome() {
+  const navigate = useNavigate();
+
   return (
     <div className='welcome-container'>
       <div className='welcome-content'>
@@ -28,10 +31,10 @@ function Welcome() {
             우리 토끼 정보 관리
           </div>
         </div>
+      </div>
 
-        <div className='button-area'>
-          <Button text='시작하기' />
-        </div>
+      <div className='button-area'>
+        <Button text='시작하기' onClick={() => navigate('/setup')} />
       </div>
     </div>
   );

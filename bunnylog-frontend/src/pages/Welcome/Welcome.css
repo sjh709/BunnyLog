@@ -1,16 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Pretendard', sans-serif;
-}
-
 .welcome-container {
-  background: #fafafa;
-
   width: 100%;
   max-width: 430px;
   min-height: 100dvh;
@@ -47,13 +35,14 @@ h1 {
 .feature-list {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 18px;
 }
 
 .feature-item {
   background: white;
   border-radius: 14px;
-  padding: 18px;
+  padding: 18px 30px;
   font-size: 16px;
   color: #4a4036;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -61,6 +50,8 @@ h1 {
   display: flex;
   align-items: center;
   gap: 10px;
+
+  width: 80%;
 }
 
 .feature-icon {
