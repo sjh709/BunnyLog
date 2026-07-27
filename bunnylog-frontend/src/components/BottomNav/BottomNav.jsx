@@ -10,7 +10,7 @@ function BottomNav() {
         <span>홈</span>
       </NavLink>
 
-      <NavLink to='/'>
+      <NavLink to='/rabbits'>
         <Rabbit size={24} />
         <span>토끼 관리</span>
       </NavLink>
