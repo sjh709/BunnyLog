@@ -15,7 +15,7 @@ function BottomNav() {
         <span>토끼 관리</span>
       </NavLink>
 
-      <NavLink to='/'>
+      <NavLink to='/snacks'>
         <BookOpen size={24} />
         <span>간식 도감</span>
       </NavLink>

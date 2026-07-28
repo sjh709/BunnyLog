@@ -5,6 +5,7 @@ import RabbitSetup from './pages/RabbitSetup/RabbitSetup';
 import SetupComplete from './pages/SetupComplete/SetupComplete';
 import Home from './pages/Home/Home';
 import RabbitManage from './pages/RabbitManage/RabbitManage';
+import SnackBook from './pages/SnackBook/SnackBook';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path='/setup/complete' element={<SetupComplete />} />
       <Route path='/home' element={<Home />} />
       <Route path='/rabbits' element={<RabbitManage />} />
+      <Route path='/snacks' element={<SnackBook />} />
     </Routes>
   );
 }
