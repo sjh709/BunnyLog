@@ -6,6 +6,7 @@ import SetupComplete from './pages/SetupComplete/SetupComplete';
 import Home from './pages/Home/Home';
 import RabbitManage from './pages/RabbitManage/RabbitManage';
 import SnackBook from './pages/SnackBook/SnackBook';
+import SnackDetail from './pages/SnackDetail/SnackDetail';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path='/home' element={<Home />} />
       <Route path='/rabbits' element={<RabbitManage />} />
       <Route path='/snacks' element={<SnackBook />} />
+      <Route path='/snack' element={<SnackDetail />} /> // 임시
     </Routes>
   );
 }
