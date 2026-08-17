@@ -20,7 +20,7 @@ function BottomNav() {
         <span>간식 도감</span>
       </NavLink>
 
-      <NavLink to='/'>
+      <NavLink to='/logs'>
         <NotebookPen size={24} />
         <span>간식 일지</span>
       </NavLink>

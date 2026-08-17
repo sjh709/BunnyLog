@@ -1,0 +1,101 @@
+.snack-log-container {
+  min-height: 100dvh;
+  padding: 32px 24px 100px;
+}
+
+.add-log-btn {
+  margin-bottom: 24px;
+}
+
+.log-date-group {
+  margin-bottom: 20px;
+}
+
+.log-date-group h2 {
+  margin: 0 0 8px 4px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  color: #707070;
+}
+
+.log-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.log-card {
+  width: 100%;
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 12px 14px;
+
+  border: 1px solid #ece8e2;
+  border-radius: 14px;
+
+  background: white;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  transition: 0.15s;
+}
+
+.log-card:hover {
+  background: #fcfcfb;
+}
+
+.rabbit-area {
+  width: 100px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 13px;
+  color: #4f4f4f;
+}
+
+.rabbit-info-photo {
+  width: 32px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.snack-area {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #2f2f2f;
+}
+
+.snack-emoji {
+  font-size: 19px;
+}
+
+.reaction-area {
+  width: 75px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+
+  font-size: 14px;
+  color: #2f2f2f;
+}
+
+.reaction-emoji {
+  font-size: 19px;
+}
