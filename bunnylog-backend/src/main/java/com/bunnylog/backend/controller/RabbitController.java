@@ -2,12 +2,13 @@ package com.bunnylog.backend.controller;
 
 import com.bunnylog.backend.domain.Rabbit;
 import com.bunnylog.backend.dto.RabbitRequest;
+import com.bunnylog.backend.dto.RabbitResponse;
 import com.bunnylog.backend.service.RabbitService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,5 +28,12 @@ public class RabbitController {
                 request.gender(),
                 request.weight()
         );
+    }
+
+    @GetMapping("/api/rabbits")
+    public List<RabbitResponse> getRabbits(
+            @RequestParam String deviceId
+    ) {
+        return rabbitService.getRabbits(deviceId);
     }
 }
