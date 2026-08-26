@@ -3,6 +3,7 @@ import Button from '../../components/Button/Button';
 import { ChevronLeft, Camera, Check, Calendar } from 'lucide-react';
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { createRabbit } from '../../api/rabbitApi';
 
 function RabbitSetup() {
   const [gender, setGender] = useState('FEMALE');
@@ -28,26 +29,45 @@ function RabbitSetup() {
     });
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!name.trim()) {
       alert('이름을 입력해주세요.');
       return;
     }
+    if (!birthday) {
+      alert('생일을 선택해주세요.');
+      return;
+    }
+    if (!weight) {
+      alert('몸무게를 입력해주세요.');
+      return;
+    }
 
-    const rabbit = {
-      name,
-      birthday,
-      gender,
-      weight,
-    };
+    try {
+      const deviceId = localStorage.getItem('deviceId') || crypto.randomUUID();
 
-    console.log(rabbit);
+      const rabbit = {
+        deviceId,
+        imageUrl: null,
+        name,
+        birthday: birthday || null,
+        gender,
+        weight: weight ? Number(weight) : null,
+      };
 
-    navigate('/setup/complete', {
-      state: {
-        rabbitName: name,
-      },
-    });
+      await createRabbit(rabbit);
+
+      localStorage.setItem('deviceId', deviceId);
+
+      navigate('/setup/complete', {
+        state: {
+          rabbitName: name,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      alert('토끼 등록에 실패했습니다.');
+    }
   };
 
   return (
@@ -80,7 +100,9 @@ function RabbitSetup() {
       </div>
 
       <div className='input-group'>
-        <label>생일</label>
+        <label>
+          생일 <span className='required'>*</span>
+        </label>
         <button type='button' className='date-button' onClick={openDatePicker}>
           {birthday ? formatDate(birthday) : '생일을 선택해주세요'}
           <Calendar size={18} />
@@ -96,9 +118,7 @@ function RabbitSetup() {
       </div>
 
       <div className='input-group'>
-        <label>
-          성별 <span className='required'>*</span>
-        </label>
+        <label>성별</label>
 
         <div className='gender-group'>
           <label
@@ -132,7 +152,9 @@ function RabbitSetup() {
       </div>
 
       <div className='input-group'>
-        <label>몸무게(kg)</label>
+        <label>
+          몸무게(kg) <span className='required'>*</span>
+        </label>
         <input
           type='number'
           placeholder='예) 1.8'

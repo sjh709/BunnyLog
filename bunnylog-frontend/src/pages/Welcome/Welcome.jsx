@@ -2,9 +2,31 @@ import './Welcome.css';
 import { Leaf, BookOpen, Rabbit } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import { getRabbits } from '../../api/rabbitApi';
 
 function Welcome() {
   const navigate = useNavigate();
+
+  const handleStart = async () => {
+    const deviceId = localStorage.getItem('deviceId');
+
+    if (!deviceId) {
+      navigate('/setup');
+      return;
+    }
+
+    try {
+      const rabbits = await getRabbits(deviceId);
+
+      if (rabbits.length > 0) {
+        navigate('/home');
+      } else {
+        navigate('/setup');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className='welcome-container'>
@@ -34,7 +56,7 @@ function Welcome() {
       </div>
 
       <div className='button-area'>
-        <Button text='시작하기' onClick={() => navigate('/setup')} />
+        <Button text='시작하기' onClick={handleStart} />
       </div>
     </div>
   );

@@ -22,11 +22,14 @@ public class Rabbit {
 
     private String name;
 
+    @Column(nullable = false)
     private LocalDate birthday;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @Column(nullable = false)
     private BigDecimal weight;
 
     @ManyToOne
