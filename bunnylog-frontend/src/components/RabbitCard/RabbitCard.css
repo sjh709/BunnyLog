@@ -1,4 +1,6 @@
 .rabbit-card {
+  position: relative;
+
   display: flex;
   gap: 18px;
 
@@ -41,8 +43,12 @@
   color: #2f2f2f;
 }
 
-.rabbit-top span {
+.rabbit-top .female {
   color: #ff79a8;
+}
+
+.rabbit-top .male {
+  color: #6aa8ff;
 }
 
 .info-item {
@@ -62,4 +68,43 @@
 
   font-size: 18px;
   color: #2f2f2f;
+}
+
+/* 캐러셀 화살표 */
+.rabbit-arrow {
+  position: absolute;
+
+  bottom: 12px;
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+  cursor: pointer;
+
+  z-index: 2;
+}
+
+.rabbit-arrow-left {
+  left: 12px;
+}
+
+.rabbit-arrow-right {
+  right: 12px;
+}
+
+.rabbit-arrow:active {
+  transform: scale(0.9);
 }

@@ -1,6 +1,5 @@
 import BottomNav from '../../components/BottomNav/BottomNav';
 import RabbitCard from '../../components/RabbitCard/RabbitCard';
-import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { getRabbits } from '../../api/rabbitApi';
 import './Home.css';
@@ -97,41 +96,36 @@ function Home() {
       <header className='home-header'>
         <div>
           <p className='greeting'>안녕하세요,</p>
-          <h1>토리 집사님!</h1>
+          <h1>{rabbits[currentIndex]?.name} 집사님!</h1>
         </div>
       </header>
 
       {/* 토끼정보(카드) */}
-      <div className='rabbit-carousel'>
-        {rabbits.length > 1 && (
-          <button className='carousel-btn' onClick={handlePrev}>
-            <ChevronLeft size={22} />
-          </button>
-        )}
-
-        <div
-          className='rabbit-slider'
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
+      {rabbits.length > 0 && (
+        <>
           <div
-            className='rabbit-track'
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            className='rabbit-slider'
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
-            {rabbits.map((rabbit) => (
-              <div className='rabbit-slide' key={rabbit.id}>
-                <RabbitCard rabbit={rabbit} />
-              </div>
-            ))}
+            <div
+              className='rabbit-track'
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {rabbits.map((rabbit) => (
+                <div className='rabbit-slide' key={rabbit.id}>
+                  <RabbitCard
+                    rabbit={rabbit}
+                    showArrows={rabbits.length > 1}
+                    onPrev={handlePrev}
+                    onNext={handleNext}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-
-        {rabbits.length > 1 && (
-          <button className='carousel-btn' onClick={handleNext}>
-            <ChevronRight size={22} />
-          </button>
-        )}
-      </div>
+        </>
+      )}
 
       {rabbits.length > 1 && (
         <div className='carousel-indicator'>
