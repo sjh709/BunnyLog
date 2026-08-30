@@ -1,16 +1,19 @@
 .rabbit-card {
+  display: flex;
+  gap: 18px;
+
   background: white;
   border-radius: 18px;
   padding: 20px;
 
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 
-  margin-bottom: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.rabbit-card {
-  display: flex;
-  gap: 18px;
+.rabbit-card:active {
+  transform: scale(0.98);
 }
 
 .rabbit-photo {
@@ -59,8 +62,4 @@
 
   font-size: 18px;
   color: #2f2f2f;
-}
-
-.rabbit-info-btn {
-  align-self: center;
 }

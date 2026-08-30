@@ -1,31 +1,30 @@
 import './RabbitSetup.css';
 import Button from '../../components/Button/Button';
 import { ChevronLeft, Camera, Check, Calendar } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createRabbit } from '../../api/rabbitApi';
 
 function RabbitSetup() {
   const [gender, setGender] = useState('FEMALE');
   const [birthday, setBirthday] = useState('');
-  const dateRef = useRef();
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [weight, setWeight] = useState('');
-
-  const openDatePicker = () => {
-    if (dateRef.current.showPicker) {
-      dateRef.current.showPicker();
-    } else {
-      dateRef.current.click();
-    }
-  };
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+    });
+  };
+
+  const generateDeviceId = () => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      const r = (Math.random() * 16) | 0;
+      const v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
     });
   };
 
@@ -44,7 +43,8 @@ function RabbitSetup() {
     }
 
     try {
-      const deviceId = localStorage.getItem('deviceId') || crypto.randomUUID();
+      // const deviceId = localStorage.getItem('deviceId') || crypto.randomUUID();
+      const deviceId = localStorage.getItem('deviceId') || generateDeviceId();
 
       const rabbit = {
         deviceId,
@@ -67,6 +67,7 @@ function RabbitSetup() {
     } catch (error) {
       console.error(error);
       alert('토끼 등록에 실패했습니다.');
+      // alert(`토끼 등록 실패: ${error.message}`);
     }
   };
 
@@ -103,18 +104,20 @@ function RabbitSetup() {
         <label>
           생일 <span className='required'>*</span>
         </label>
-        <button type='button' className='date-button' onClick={openDatePicker}>
-          {birthday ? formatDate(birthday) : '생일을 선택해주세요'}
-          <Calendar size={18} />
-        </button>
 
-        <input
-          ref={dateRef}
-          type='date'
-          value={birthday}
-          onChange={(e) => setBirthday(e.target.value)}
-          className='hidden-date'
-        />
+        <div className='date-button'>
+          <span className={!birthday ? 'date-placeholder' : ''}>
+            {birthday ? formatDate(birthday) : '생일을 선택해주세요.'}
+          </span>
+
+          <Calendar size={18} />
+
+          <input
+            type='date'
+            value={birthday}
+            onChange={(e) => setBirthday(e.target.value)}
+          />
+        </div>
       </div>
 
       <div className='input-group'>

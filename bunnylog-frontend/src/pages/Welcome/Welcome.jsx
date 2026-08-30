@@ -28,6 +28,12 @@ function Welcome() {
     }
   };
 
+  // 테스트 초기화
+  const resetDevice = () => {
+    localStorage.removeItem('deviceId');
+    window.location.reload();
+  };
+
   return (
     <div className='welcome-container'>
       <div className='welcome-content'>
@@ -57,6 +63,7 @@ function Welcome() {
 
       <div className='button-area'>
         <Button text='시작하기' onClick={handleStart} />
+        <Button text='테스트 초기화' onClick={resetDevice} />
       </div>
     </div>
   );

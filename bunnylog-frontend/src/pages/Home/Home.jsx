@@ -1,8 +1,96 @@
 import BottomNav from '../../components/BottomNav/BottomNav';
 import RabbitCard from '../../components/RabbitCard/RabbitCard';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { getRabbits } from '../../api/rabbitApi';
 import './Home.css';
 
 function Home() {
+  const [rabbits, setRabbits] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+
+  useEffect(() => {
+    const fetchRabbits = async () => {
+      const deviceId = localStorage.getItem('deviceId');
+
+      if (!deviceId) {
+        return;
+      }
+
+      try {
+        const rabbits = await getRabbits(deviceId);
+        console.log('rrr', rabbits);
+        setRabbits(rabbits);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchRabbits();
+  }, []);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => {
+      if (prev === rabbits.length - 1) {
+        return 0;
+      }
+
+      return prev + 1;
+    });
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => {
+      if (prev === 0) {
+        return rabbits.length - 1;
+      }
+
+      return prev - 1;
+    });
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStart === null || rabbits.length <= 1) {
+      return;
+    }
+
+    const touchEnd = e.changedTouches[0].clientX;
+    const distance = touchStart - touchEnd;
+
+    // 너무 조금 움직인 경우 스와이프로 판단하지 않음
+    if (Math.abs(distance) < 50) {
+      setTouchStart(null);
+      return;
+    }
+
+    if (distance > 0) {
+      // 왼쪽으로 스와이프 -> 다음
+      setCurrentIndex((prev) => {
+        if (prev === rabbits.length - 1) {
+          return 0;
+        }
+
+        return prev + 1;
+      });
+    } else {
+      // 오른쪽으로 스와이프 -> 이전
+      setCurrentIndex((prev) => {
+        if (prev === 0) {
+          return rabbits.length - 1;
+        }
+
+        return prev - 1;
+      });
+    }
+
+    setTouchStart(null);
+  };
+
   return (
     <div className='home-container'>
       {/* 인사말 */}
@@ -14,7 +102,47 @@ function Home() {
       </header>
 
       {/* 토끼정보(카드) */}
-      <RabbitCard />
+      <div className='rabbit-carousel'>
+        {rabbits.length > 1 && (
+          <button className='carousel-btn' onClick={handlePrev}>
+            <ChevronLeft size={22} />
+          </button>
+        )}
+
+        <div
+          className='rabbit-slider'
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div
+            className='rabbit-track'
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {rabbits.map((rabbit) => (
+              <div className='rabbit-slide' key={rabbit.id}>
+                <RabbitCard rabbit={rabbit} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {rabbits.length > 1 && (
+          <button className='carousel-btn' onClick={handleNext}>
+            <ChevronRight size={22} />
+          </button>
+        )}
+      </div>
+
+      {rabbits.length > 1 && (
+        <div className='carousel-indicator'>
+          {rabbits.map((rabbit, index) => (
+            <span
+              key={rabbit.id}
+              className={index === currentIndex ? 'active' : ''}
+            />
+          ))}
+        </div>
+      )}
 
       {/* 최근급여기록(카드) */}
       <section className='feed-card'>

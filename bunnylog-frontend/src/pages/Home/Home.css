@@ -25,6 +25,53 @@
   color: #2f2f2f;
 }
 
+.rabbit-carousel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.carousel-btn {
+  border: none;
+  background: none;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.rabbit-slider {
+  flex: 1;
+  overflow: hidden;
+}
+
+.rabbit-track {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.rabbit-slide {
+  min-width: 100%;
+  box-sizing: transform 0.3s ease;
+}
+
+.carousel-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.carousel-indicator span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+.carousel-indicator span.active {
+  background: #333;
+}
+
 .feed-card {
   background: white;
   border-radius: 18px;

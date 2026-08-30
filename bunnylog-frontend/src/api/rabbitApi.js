@@ -1,6 +1,8 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export const getRabbits = async (deviceId) => {
   const response = await fetch(
-    `http://localhost:8080/api/rabbits?deviceId=${deviceId}`,
+    `${API_BASE_URL}/api/rabbits?deviceId=${deviceId}`,
   );
 
   if (!response.ok) {
@@ -11,7 +13,7 @@ export const getRabbits = async (deviceId) => {
 };
 
 export const createRabbit = async (rabbit) => {
-  const response = await fetch(`http://localhost:8080/api/rabbits`, {
+  const response = await fetch(`${API_BASE_URL}/api/rabbits`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
