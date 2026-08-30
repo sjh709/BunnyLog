@@ -8,6 +8,7 @@ import RabbitManage from './pages/RabbitManage/RabbitManage';
 import SnackBook from './pages/SnackBook/SnackBook';
 import SnackDetail from './pages/SnackDetail/SnackDetail';
 import SnackLog from './pages/SnackLog/SnackLog';
+import RabbitDetail from './pages/RabbitDetail/RabbitDetail';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path='/setup/complete' element={<SetupComplete />} />
       <Route path='/home' element={<Home />} />
       <Route path='/rabbits' element={<RabbitManage />} />
+      <Route path='/rabbits/:rabbitId' element={<RabbitDetail />} />
       <Route path='/snacks' element={<SnackBook />} />
       <Route path='/logs' element={<SnackLog />} />
       <Route path='/snack' element={<SnackDetail />} /> // 임시

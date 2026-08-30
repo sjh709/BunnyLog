@@ -50,4 +50,20 @@ public class RabbitService {
                 ))
                 .toList();
     }
+
+    public RabbitResponse getRabbit(Long rabbitId) {
+        Rabbit rabbit = rabbitRepository.findById(rabbitId)
+                .orElseThrow(() -> new RuntimeException("토끼를 찾을 수 없습니다."));
+
+        return new RabbitResponse(
+                rabbit.getId(),
+                rabbit.getImageUrl(),
+                rabbit.getName(),
+                rabbit.getBirthday(),
+                rabbit.getGender(),
+                rabbit.getWeight(),
+                rabbit.getCreatedAt(),
+                rabbit.getUpdatedAt()
+        );
+    }
 }

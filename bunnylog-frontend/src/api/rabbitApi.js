@@ -6,7 +6,8 @@ export const getRabbits = async (deviceId) => {
   );
 
   if (!response.ok) {
-    throw new Error('토끼 정보를 불러오지 못했습니다.');
+    const error = await response.text();
+    throw new Error(error || '토끼 정보를 불러오지 못했습니다.');
   }
 
   return response.json();
@@ -23,6 +24,17 @@ export const createRabbit = async (rabbit) => {
 
   if (!response.ok) {
     throw new Error('토끼 등록에 실패했습니다.');
+  }
+
+  return response.json();
+};
+
+export const getRabbit = async (rabbitId) => {
+  const response = await fetch(`${API_BASE_URL}/api/rabbits/${rabbitId}`);
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(error || '토끼 조회에 실패했습니다.');
   }
 
   return response.json();

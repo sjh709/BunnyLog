@@ -19,7 +19,6 @@ function Home() {
 
       try {
         const rabbits = await getRabbits(deviceId);
-        console.log('rrr', rabbits);
         setRabbits(rabbits);
       } catch (error) {
         console.error(error);

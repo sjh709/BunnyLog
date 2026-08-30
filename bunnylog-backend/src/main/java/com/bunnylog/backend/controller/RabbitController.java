@@ -38,4 +38,9 @@ public class RabbitController {
     ) {
         return rabbitService.getRabbits(deviceId);
     }
+
+    @GetMapping("/api/rabbits/{rabbitId}")
+    public RabbitResponse getRabbit(@PathVariable Long rabbitId) {
+        return rabbitService.getRabbit(rabbitId);
+    }
 }
